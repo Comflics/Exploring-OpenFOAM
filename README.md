@@ -1,4 +1,4 @@
-###Exploring OpenFOAM®
+###Exploring OpenFOAM
 ======================
 Chapter 1: Introduction to OpenFOAM and Linux (coming soon)
 
