@@ -19,8 +19,8 @@ ddtSchemes
 {
     //default         Euler;
     default         CrankNicolson 0.5;
-//  OF 2.3.x and later versions    
-//  default         CrankNicolson 0.5;
+//  OF 2.2.x and older versions    
+//  default         CrankNicholson 0.5;
 }
 
 gradSchemes
