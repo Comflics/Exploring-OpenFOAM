@@ -1,11 +1,14 @@
 #!/usr/bin/python
+# Comflics: Exploring OpenFOAM
+# Compute Strouhal Number of Laminar Vortex Shedding
+# S. Huq, 13MAY17
+#
 import numpy as np
-from scipy.fftpack import fft
+import scipy.signal as signal
 import matplotlib.pyplot as plt
 
-
 # # Read Results
-data = np.loadtxt('./postProcessing/forceCoeffs/0/forceCoeffs.dat', skiprows=0)
+data = np.loadtxt('./postProcessing/forceCoeffs/0/forceCoeffs.dat', skiprows=800)
 
 L       = 2           # L = D - Diameter
 V       = 1           # Velocity
@@ -15,32 +18,36 @@ Cl      = data[:,3]
 
 del data
 
-
 # # Compute FFT
 
 N       = len(time)
 dt      = time[2] - time[1]
 
-freq    = np.fft.fftfreq(N, dt)
-Cd_fft  = np.fft.fft(Cd) 
-Cl_fft  = np.fft.fft(Cl)
+# # inaccurate FFT
+# freq    = np.fft.fftfreq(N, dt)
+# Cd_fft  = np.fft.fft(Cd) 
+# Cl_amp  = np.fft.fft(Cl) 
+# plt.plot(freq, Cl_amp)       # Figure 2.10
+# plt.show()
+
+# # Better stable FFT
+nmax=512                       # no. of points in the fft
+# freq, Cd_amp = signal.welch(Cd, 1./dt, nperseg=nmax)
+freq, Cl_amp = signal.welch(Cl, 1./dt, nperseg=nmax)
+plt.plot(freq, Cl_amp)         # Figure 2.10
+plt.show() 
 
 # # Strouhal Number
 # Find the index corresponding to max amplitude
-Cl_max_fft_idx = np.argmax(abs(Cl_fft))  
+Cl_max_fft_idx = np.argmax(abs(Cl_amp))  
 freq_shed      = freq[Cl_max_fft_idx ]
 St             = freq_shed * L / V
 
 print "Vortex shedding freq: %.3f [Hz]" % (freq_shed)
 print "Strouhal Number: %.3f" % (St)
 
-# plt.plot(freq,Cd_fft)
-# Figure 2.10
-plt.plot(freq, Cl_fft)
-plt.xlim(0, 0.3)
-plt.show()
-
 # # Explore Results
+# # 
 # # Figure 2.8
 # # See if there atleast 10 cycles of oscillation
 # # improves the accuracy; 
@@ -49,3 +56,10 @@ plt.show()
 # # Figure 2.9
 # plt.plot(time,Cd)
 # plt.show()
+# # 
+# # Exercise
+# # Exclude data before onset of the oscillations. 
+# # approx time = 200 s.
+# # Hint: skiprows = 800 - 950
+
+
