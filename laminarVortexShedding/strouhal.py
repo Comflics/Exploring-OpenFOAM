@@ -8,7 +8,7 @@ import scipy.signal as signal
 import matplotlib.pyplot as plt
 
 # # Read Results
-data = np.loadtxt('./postProcessing/forceCoeffs/0/forceCoeffs.dat', skiprows=800)
+data = np.loadtxt('./postProcessing/forceCoeffs/0/forceCoeffs.dat', skiprows=0)
 
 L       = 2           # L = D - Diameter
 V       = 1           # Velocity
