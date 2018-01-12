@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.1.x                                 |
+|  \\    /   O peration     | Version:  5                                     |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -39,7 +39,8 @@ divSchemes
     div(phi,R)      Gauss limitedLinear 1;
     div(R)          Gauss linear;
     div(phi,nuTilda) Gauss limitedLinear 1;
-    div((nuEff*dev(T(grad(U))))) Gauss linear;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear; //OpenFOAM 5.
+//  div((nuEff*dev(T(grad(U))))) Gauss linear;
 //  div((nuEff*dev(grad(U).T()))) Gauss linear;  //Foam-extend 3.1
     
 }
