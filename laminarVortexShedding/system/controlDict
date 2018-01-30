@@ -28,8 +28,9 @@ endTime         1000;
 deltaT          0.025;
 
 writeControl    timeStep;
+// writeControl    adjustableRunTime; // OF-2.3.x
 
-writeInterval   200;
+writeInterval   5;
 
 purgeWrite      0;
 
@@ -61,6 +62,7 @@ forces
     pName               p;
     UName               U;
     rho                 rhoInf;
+ // rhoName             rhoInf; // OF-2.3.x
     log                 true; 
     CofR                (0 0 0);     
     rhoInf              1.225;
@@ -78,6 +80,7 @@ forceCoeffs
     pName               p;
     UName               U;
     rho                 rhoInf;
+ // rhoName             rhoInf; // OF-2.3.x
     log                 true;
      
     liftDir             (0 1 0);
