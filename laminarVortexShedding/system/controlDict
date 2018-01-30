@@ -27,9 +27,9 @@ endTime         1000;
 
 deltaT          0.025;
 
-writeControl    adjustableRunTime;
+writeControl    timeStep;
 
-writeInterval   5;
+writeInterval   200;
 
 purgeWrite      0;
 
@@ -60,7 +60,7 @@ forces
     patches             ( "cylinder" );
     pName               p;
     UName               U;
-    rhoName             rhoInf;
+    rho                 rhoInf;
     log                 true; 
     CofR                (0 0 0);     
     rhoInf              1.225;
@@ -77,7 +77,7 @@ forceCoeffs
     patches             ( "cylinder" );
     pName               p;
     UName               U;
-    rhoName             rhoInf;
+    rho                 rhoInf;
     log                 true;
      
     liftDir             (0 1 0);
